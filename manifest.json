@@ -2,12 +2,23 @@
   "manifest_version": 2,
   "name": "Save Links Extension",
   "version": "1.0",
-  "permissions": ["activeTab"],
-  "background": {
-    "scripts": ["background.js"]
-  },
+  "permissions": ["activeTab", "storage", "tabs"],
   "browser_action": {
     "default_icon": "icon.png",
     "default_title": "Save the current link"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }
